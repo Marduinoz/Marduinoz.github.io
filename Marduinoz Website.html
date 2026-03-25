@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Marduinoz | Music</title>
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+
+  <style>
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      color: #fff;
+      overflow-x: hidden;
+      background: #0a0a0a;
+    }
+
+    /* Animated gradient background */
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(270deg, #1a1a1a, #2d2d2d, #111);
+      background-size: 600% 600%;
+      animation: gradientShift 15s ease infinite;
+      z-index: -1;
+    }
+
+    @keyframes gradientShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    header {
+      text-align: center;
+      padding: 30px 15px;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 2.5rem;
+      letter-spacing: 2px;
+    }
+
+    nav {
+      margin-top: 15px;
+    }
+
+    nav a {
+      margin: 0 10px;
+      color: #aaa;
+      text-decoration: none;
+      font-size: 0.9rem;
+    }
+
+    nav a:hover {
+      color: #fff;
+    }
+
+    section {
+      padding: 30px 15px;
+      max-width: 1000px;
+      margin: auto;
+    }
+
+    h2 {
+      font-weight: 500;
+    }
+
+    .socials {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .socials a {
+      margin: 8px;
+      padding: 10px 15px;
+      background: rgba(255,255,255,0.05);
+      border-radius: 20px;
+      text-decoration: none;
+      color: #fff;
+      font-size: 0.85rem;
+      transition: 0.3s;
+    }
+
+    .socials a:hover {
+      background: rgba(255,255,255,0.15);
+    }
+
+    /* Music grid */
+    .music-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 15px;
+    }
+
+    .album {
+      background: rgba(255,255,255,0.05);
+      border-radius: 16px;
+      padding: 10px;
+      text-align: center;
+      backdrop-filter: blur(10px);
+    }
+
+    .album img {
+      width: 100%;
+      border-radius: 12px;
+    }
+
+    .album h3 {
+      font-size: 0.9rem;
+      margin: 10px 0;
+    }
+
+    /* Custom Player */
+    .player {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background: rgba(0,0,0,0.9);
+      padding: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .player button {
+      background: none;
+      border: none;
+      color: #fff;
+      font-size: 1rem;
+    }
+
+    .player span {
+      font-size: 0.8rem;
+      margin-left: 10px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      font-size: 0.8rem;
+      color: #777;
+      margin-bottom: 60px;
+    }
+
+    @media (max-width: 600px) {
+      header h1 { font-size: 2rem; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Marduinoz</h1>
+  <nav>
+    <a href="#socials">Socials</a>
+    <a href="#music">Music</a>
+    <a href="#about">About</a>
+  </nav>
+</header>
+
+<section id="socials">
+  <h2>Social Media</h2>
+  <div class="socials">
+    <a href="#">YouTube</a>
+    <a href="#">Spotify</a>
+    <a href="#">Instagram</a>
+    <a href="#">TikTok</a>
+    <a href="#">Kick</a>
+  </div>
+</section>
+
+<section id="music">
+  <h2>My Music</h2>
+  <div class="music-grid">
+
+    <div class="album" onclick="playSong('song1.mp3','How This Turned Out')">
+      <img src="album1.jpg" />
+      <h3>How This Turned Out</h3>
+    </div>
+
+    <div class="album" onclick="playSong('song2.mp3','Watched You Give Up')">
+      <img src="album2.jpg" />
+      <h3>Watched You Give Up</h3>
+    </div>
+
+  </div>
+</section>
+
+<section id="about">
+  <h2>About</h2>
+  <p>
+    Marduinoz is an independent artist blending emotional storytelling with immersive sound design.
+    Available for collaborations, content creation, and custom music production.
+  </p>
+</section>
+
+<!-- Music Player -->
+<div class="player">
+  <button onclick="togglePlay()">▶ / ⏸</button>
+  <span id="trackName">No song playing</span>
+</div>
+
+<footer>
+  <p>© 2026 Marduinoz</p>
+</footer>
+
+<script>
+  const audio = new Audio();
+
+  function playSong(src, name) {
+    audio.src = src;
+    audio.play();
+    document.getElementById('trackName').innerText = name;
+  }
+
+  function togglePlay() {
+    if (audio.paused) {
+      audio.play();
+    } else {
+      audio.pause();
+    }
+  }
+</script>
+
+</body>
+</html>
